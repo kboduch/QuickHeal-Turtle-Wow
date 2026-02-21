@@ -204,6 +204,22 @@ function QuickHeal_Druid_FindHealSpellToUse(Target, healType, multiplier, forceM
         if healneed > (1656+healMod35)*gonMod*K and ManaLeft >= 600*tsMod*mgMod and maxRankHT >=  9 and downRankNH >= 9 and SpellIDsHT[9] then SpellID =  SpellIDsHT[9]; HealSize = (1656+healMod35)*gonMod end
         if healneed > (2060+healMod35)*gonMod*K and ManaLeft >= 720*tsMod*mgMod and maxRankHT >= 10 and downRankNH >= 10 and SpellIDsHT[10] then SpellID = SpellIDsHT[10]; HealSize = (2060+healMod35)*gonMod end
         if healneed > (2472+healMod35)*gonMod*K and ManaLeft >= 800*tsMod*mgMod and maxRankHT >= 11 and downRankNH >= 11 and SpellIDsHT[11] then SpellID = SpellIDsHT[11]; HealSize = (2472+healMod35)*gonMod end
+    elseif QHV.DruidRegrowthNoRecast and QuickHeal_DetectBuff(Target, "Spell_Nature_ResistNature") then
+        -- Regrowth HoT already active on target; fall back to Healing Touch
+        debug(string.format("Regrowth HoT active on target, using Healing Touch instead"));
+        if Health < RatioFull then
+            SpellID = SpellIDsHT[1]; HealSize = (44+healMod15*PF1)*gonMod; -- Default to rank 1
+            if healneed > ( 100+healMod20*PF8)*gonMod*k and ManaLeft >=  55*tsMod*mgMod and maxRankHT >=  2 and downRankNH >= 2 and SpellIDsHT[2] then SpellID =  SpellIDsHT[2]; HealSize =  (100+healMod20*PF8)*gonMod end
+            if healneed > ( 219+healMod25*PF14)*gonMod*K and ManaLeft >= 110*tsMod*mgMod and maxRankHT >=  3 and downRankNH >= 3 and SpellIDsHT[3] then SpellID =  SpellIDsHT[3]; HealSize =  (219+healMod25*PF14)*gonMod end
+            if healneed > ( 404+healMod30)*gonMod*K and ManaLeft >= 185*tsMod*mgMod and maxRankHT >=  4 and downRankNH >= 4 and SpellIDsHT[4] then SpellID =  SpellIDsHT[4]; HealSize =  (404+healMod30)*gonMod end
+            if healneed > ( 633+healMod35)*gonMod*K and ManaLeft >= 270*tsMod*mgMod and maxRankHT >=  5 and downRankNH >= 5 and SpellIDsHT[5] then SpellID =  SpellIDsHT[5]; HealSize =  (633+healMod35)*gonMod end
+            if healneed > ( 818+healMod35)*gonMod*K and ManaLeft >= 335*tsMod*mgMod and maxRankHT >=  6 and downRankNH >= 6 and SpellIDsHT[6] then SpellID =  SpellIDsHT[6]; HealSize =  (818+healMod35)*gonMod end
+            if healneed > (1028+healMod35)*gonMod*K and ManaLeft >= 405*tsMod*mgMod and maxRankHT >=  7 and downRankNH >= 7 and SpellIDsHT[7] then SpellID =  SpellIDsHT[7]; HealSize = (1028+healMod35)*gonMod end
+            if healneed > (1313+healMod35)*gonMod*K and ManaLeft >= 495*tsMod*mgMod and maxRankHT >=  8 and downRankNH >= 8 and SpellIDsHT[8] then SpellID =  SpellIDsHT[8]; HealSize = (1313+healMod35)*gonMod end
+            if healneed > (1656+healMod35)*gonMod*K and ManaLeft >= 600*tsMod*mgMod and maxRankHT >=  9 and downRankNH >= 9 and SpellIDsHT[9] then SpellID =  SpellIDsHT[9]; HealSize = (1656+healMod35)*gonMod end
+            if healneed > (2060+healMod35)*gonMod*K and ManaLeft >= 720*tsMod*mgMod and maxRankHT >= 10 and downRankNH >= 10 and SpellIDsHT[10] then SpellID = SpellIDsHT[10]; HealSize = (2060+healMod35)*gonMod end
+            if healneed > (2472+healMod35)*gonMod*K and ManaLeft >= 800*tsMod*mgMod and maxRankHT >= 11 and downRankNH >= 11 and SpellIDsHT[11] then SpellID = SpellIDsHT[11]; HealSize = (2472+healMod35)*gonMod end
+        end
     else
         -- target is unhealthy and player has Regrowth
         debug(string.format("In combat and target unhealthy and Regrowth available, will use Regrowth"));

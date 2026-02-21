@@ -462,6 +462,20 @@
                 </FontString>
             </Layer>
 
+            <!-- Druid Regrowth No-Recast Text -->
+            <Layer level="ARTWORK">
+                <FontString name="QuickHealConfig_TextDruidRegrowthNoRecast" inherits="GameFontNormalSmall"
+                            text="Regrowth: skip if HoT active (Druid)">
+                    <Anchors>
+                        <Anchor point="TOPLEFT">
+                            <Offset>
+                                <AbsDimension x="65" y="-217"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+            </Layer>
+
             <!-- Explanation Text -->
             <Layer level="ARTWORK">
                 <FontString name="QuickHealConfig_Explanation" justifyH="LEFT" justifyV="TOP" inherits="GameFontNormal"
@@ -703,6 +717,50 @@
                     <OnEnter>
                         GameTooltip:SetOwner(this,"ANCHOR_TOPLEFT");
                         GameTooltip:SetText("Check this option to enable healing with the mouse");
+                        this.tooltipShown = true;
+                    </OnEnter>
+                    <OnLeave>
+                        GameTooltip:Hide();
+                        this.tooltipShown = false;
+                    </OnLeave>
+                </Scripts>
+            </CheckButton>
+
+            <!-- Druid Regrowth No-Recast Checkbutton -->
+            <CheckButton name="QuickHealConfig_CheckButtonDruidRegrowthNoRecast" inherits="OptionsCheckButtonTemplate"
+                         checked="false">
+                <Anchors>
+                    <Anchor point="TOPLEFT">
+                        <Offset>
+                            <AbsDimension x="30" y="-208"></AbsDimension>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <onClick>
+                        if this:GetChecked() then
+                        QuickHealVariables.DruidRegrowthNoRecast = true;
+                        else
+                        QuickHealVariables.DruidRegrowthNoRecast = false;
+                        end
+                    </onClick>
+                    <OnShow>
+                        local _, PlayerClass = UnitClass('player');
+                        if string.lower(PlayerClass) == "druid" then
+                        QuickHealConfig_TextDruidRegrowthNoRecast:Show();
+                        if QuickHealVariables.DruidRegrowthNoRecast then
+                        this:SetChecked(true);
+                        else
+                        this:SetChecked(false);
+                        end
+                        else
+                        QuickHealConfig_TextDruidRegrowthNoRecast:Hide();
+                        this:Hide();
+                        end
+                    </OnShow>
+                    <OnEnter>
+                        GameTooltip:SetOwner(this,"ANCHOR_TOPLEFT");
+                        GameTooltip:SetText("Cast Regrowth only if its HoT is not already active on the target");
                         this.tooltipShown = true;
                     </OnEnter>
                     <OnLeave>

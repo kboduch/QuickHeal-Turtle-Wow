@@ -26,6 +26,7 @@ local DQHV = { -- Default values
     TargetPriority = false,
     RatioForceself = 0.4,
     RatioHealthyDruid = 0.4,
+    DruidRegrowthNoRecast = false,
     RatioHealthyPaladin = 0.1,
     RatioHealthyPriest = 0.3,
     RatioHealthyShaman = 0.6,
