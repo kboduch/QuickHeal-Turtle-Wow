@@ -993,6 +993,14 @@ local function Initialise()
         QuickHealDownrank_Slider_NH:SetValue(11);
         QuickHealDownrank_Slider_FH:SetMinMaxValues(1,9);
         QuickHealDownrank_Slider_FH:SetValue(9);
+        QuickHeal_DownrankSlider:SetHeight(110);
+        QuickHealDownrank_Slider_RJ:Show();
+        QuickHealDownrank_Slider_RJ:SetMinMaxValues(1,11);
+        QuickHealDownrank_Slider_RJ:SetValue(11);
+        QuickHealDownrank_RankNumberRJ:Show();
+        QuickHealDownrank_Slider_NHText:SetText("Healing Touch");
+        QuickHealDownrank_Slider_FHText:SetText("Regrowth");
+        QuickHealDownrank_Slider_RJText:SetText("Rejuvenation");
 
         SlashCmdList["QUICKHEAL"] = QuickHeal_Command_Druid;
         SLASH_QUICKHEAL1 = "/qh";

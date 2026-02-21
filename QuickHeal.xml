@@ -2071,6 +2071,34 @@
                     </OnLeave>
                 </Scripts>
             </Slider>
+            <!-- Downrank Slider RJ (Rejuvenation) - shown only for Druid -->
+            <Slider name="QuickHealDownrank_Slider_RJ" inherits="OptionsSliderTemplate" hidden="true">
+                <Size>
+                    <AbsDimension x="200" y="16"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT">
+                        <Offset>
+                            <AbsDimension x="20" y="-80"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnLoad>
+                        this:SetMinMaxValues(1,11);
+                        this:SetValueStep(1);
+                        this:SetValue(11)
+                    </OnLoad>
+                    <OnValueChanged>
+                        QuickHealVariables["DownrankValueRJ"] = this:GetValue();
+                        QuickHealDownrank_RankNumberRJ:SetText(QuickHealVariables["DownrankValueRJ"]);
+                    </OnValueChanged>
+                    <OnLeave>
+                        GameTooltip:Hide();
+                        this.tooltipShown = false;
+                    </OnLeave>
+                </Scripts>
+            </Slider>
         </Frames>
         <Layers>
             <Layer level="ARTWORK">
@@ -2096,6 +2124,18 @@
                 </FontString>
             </Layer>
             <Layer level="ARTWORK">
+                <FontString name="QuickHealDownrank_RankNumberRJ" outline="NORMAL" inherits="GameFontNormal" text=""
+                            hidden="true">
+                    <Anchors>
+                        <Anchor point="CENTER" relativePoint="TOP">
+                            <Offset>
+                                <AbsDimension x="108" y="-88"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+            </Layer>
+            <Layer level="ARTWORK">
                 <FontString name="QuickHealDownrank_MarkerTop" outline="NORMAL" inherits="GameFontNormal" text=">">
                     <Anchors>
                         <Anchor point="CENTER" relativePoint="TOP">
@@ -2113,6 +2153,18 @@
                         <Anchor point="CENTER" relativePoint="TOP">
                             <Offset>
                                 <AbsDimension x="-106" y="-58"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+            </Layer>
+            <Layer level="ARTWORK">
+                <FontString name="QuickHealDownrank_MarkerRJ" outline="NORMAL" inherits="GameFontNormal" text=">"
+                            hidden="true">
+                    <Anchors>
+                        <Anchor point="CENTER" relativePoint="TOP">
+                            <Offset>
+                                <AbsDimension x="-106" y="-88"/>
                             </Offset>
                         </Anchor>
                     </Anchors>
