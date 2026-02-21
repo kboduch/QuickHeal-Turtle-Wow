@@ -2010,15 +2010,8 @@
                         -->
                     </OnValueChanged>
                     <OnShow>
-                        <!--
-                            this:SetValue(QuickHealVariables["RatioFull"]*100);
-                             -->
+                        this:SetValue(QuickHealVariables["DownrankValueNH"] or 12);
                     </OnShow>
-                    <OnEnter>
-                        <!-- GameTooltip:SetOwner(this,"ANCHOR_TOPLEFT");
-                        GameTooltip:SetText(QuickHeal_GetExplanation("DownrankSlider"));
-                        this.tooltipShown = true; -->
-                    </OnEnter>
                     <OnLeave>
                         GameTooltip:Hide();
                         this.tooltipShown = false;
@@ -2056,15 +2049,8 @@
                         -->
                     </OnValueChanged>
                     <OnShow>
-                        <!--
-                            this:SetValue(QuickHealVariables["RatioFull"]*100);
-                             -->
+                        this:SetValue(QuickHealVariables["DownrankValueFH"] or 7);
                     </OnShow>
-                    <OnEnter>
-                        <!-- GameTooltip:SetOwner(this,"ANCHOR_TOPLEFT");
-                        GameTooltip:SetText(QuickHeal_GetExplanation("DownrankSlider"));
-                        this.tooltipShown = true; -->
-                    </OnEnter>
                     <OnLeave>
                         GameTooltip:Hide();
                         this.tooltipShown = false;
@@ -2093,6 +2079,9 @@
                         QuickHealVariables["DownrankValueRJ"] = this:GetValue();
                         QuickHealDownrank_RankNumberRJ:SetText(QuickHealVariables["DownrankValueRJ"]);
                     </OnValueChanged>
+                    <OnShow>
+                        this:SetValue(QuickHealVariables["DownrankValueRJ"] or 11);
+                    </OnShow>
                     <OnLeave>
                         GameTooltip:Hide();
                         this.tooltipShown = false;

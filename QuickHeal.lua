@@ -64,7 +64,10 @@ local DQHV = { -- Default values
     MeleeDPSList = { },
     HealerList = { },
     RangedDPSList = { },
-    SkipList = { }
+    SkipList = { },
+    DownrankValueNH = 12,
+    DownrankValueFH = 7,
+    DownrankValueRJ = 11,
 }
 
 local has_pepo_nam = pcall(GetCVar, "NP_QueueCastTimeSpells")
@@ -2506,6 +2509,32 @@ local function FindWhoToHOT(Restrict, extParam, noHpCheck)
 end
 
 
+-- Maps localized spell names to their downrank variable key
+local QH_SpellToDRKey = {
+    [QUICKHEAL_SPELL_HEALING_TOUCH]      = "DownrankValueNH",
+    [QUICKHEAL_SPELL_REGROWTH]           = "DownrankValueFH",
+    [QUICKHEAL_SPELL_REJUVENATION]       = "DownrankValueRJ",
+    [QUICKHEAL_SPELL_HEAL]               = "DownrankValueNH",
+    [QUICKHEAL_SPELL_GREATER_HEAL]       = "DownrankValueNH",
+    [QUICKHEAL_SPELL_FLASH_HEAL]         = "DownrankValueFH",
+    [QUICKHEAL_SPELL_LESSER_HEAL]        = "DownrankValueNH",
+    [QUICKHEAL_SPELL_HOLY_LIGHT]         = "DownrankValueNH",
+    [QUICKHEAL_SPELL_FLASH_OF_LIGHT]     = "DownrankValueFH",
+    [QUICKHEAL_SPELL_HEALING_WAVE]       = "DownrankValueNH",
+    [QUICKHEAL_SPELL_LESSER_HEALING_WAVE]= "DownrankValueFH",
+}
+
+local function GetDRMaxSuffix(spellName)
+    local key = QH_SpellToDRKey[spellName]
+    if key then
+        local val = QuickHealVariables[key]
+        if val and val > 0 then
+            return " DR max (" .. val .. ")"
+        end
+    end
+    return ""
+end
+
 local function Notification(unit, spellName)
     local unitName = UnitFullName(unit);
     local rand = math.random(1, 10);
@@ -2684,10 +2713,11 @@ local function ExecuteHeal(Target, SpellID)
         Notification(Target, SpellNameAndRank);
 
         -- Write to center of screen
+        local drSuffix = GetDRMaxSuffix(SpellName);
         if UnitIsUnit(Target, 'player') then
-            Message(string.format("Casting %s on yourself", SpellNameAndRank), "Healing", 3)
+            Message(string.format("Casting %s on yourself.%s", SpellNameAndRank, drSuffix), "Healing", 3)
         else
-            Message(string.format("Casting %s on %s", SpellNameAndRank, UnitFullName(Target)), "Healing", 3)
+            Message(string.format("Casting %s on %s.%s", SpellNameAndRank, UnitFullName(Target), drSuffix), "Healing", 3)
         end
     end
 
@@ -2779,10 +2809,11 @@ local function ExecuteHOT(Target, SpellID)
         Notification(Target, SpellNameAndRank);
 
         -- Write to center of screen
+        local drSuffix = GetDRMaxSuffix(SpellName);
         if UnitIsUnit(Target, 'player') then
-            Message(string.format("Casting %s on yourself", SpellNameAndRank), "Healing", 3)
+            Message(string.format("Casting %s on yourself.%s", SpellNameAndRank, drSuffix), "Healing", 3)
         else
-            Message(string.format("Casting %s on %s", SpellNameAndRank, UnitFullName(Target)), "Healing", 3)
+            Message(string.format("Casting %s on %s.%s", SpellNameAndRank, UnitFullName(Target), drSuffix), "Healing", 3)
         end
     end
 
