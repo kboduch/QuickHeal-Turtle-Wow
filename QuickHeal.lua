@@ -952,9 +952,9 @@ local function Initialise()
         FindHealSpellToUseNoTarget = QuickHeal_Shaman_FindHealSpellToUseNoTarget;
         GetRatioHealthyExplanation = QuickHeal_Shaman_GetRatioHealthyExplanation;
         QuickHealDownrank_Slider_NH:SetMinMaxValues(1,10);
-        QuickHealDownrank_Slider_NH:SetValue(10);
+        QuickHealDownrank_Slider_NH:SetValue(QuickHealVariables["DownrankValueNH"] or 10);
         QuickHealDownrank_Slider_FH:SetMinMaxValues(1,6);
-        QuickHealDownrank_Slider_FH:SetValue(6);
+        QuickHealDownrank_Slider_FH:SetValue(QuickHealVariables["DownrankValueFH"] or 6);
         SlashCmdList["QUICKHEAL"] = QuickHeal_Command_Shaman;
         SLASH_QUICKHEAL1 = "/qh";
         SLASH_QUICKHEAL2 = "/quickheal";
@@ -981,7 +981,7 @@ local function Initialise()
         QuickHeal_DownrankSlider:SetHeight(40);
         QuickHealDownrank_Slider_FH:SetPoint("TOPLEFT", 20, -10);
         QuickHealDownrank_Slider_FH:SetMinMaxValues(1,7);
-        QuickHealDownrank_Slider_FH:SetValue(7);
+        QuickHealDownrank_Slider_FH:SetValue(QuickHealVariables["DownrankValueFH"] or 7);
         QuickHealDownrank_RankNumberBot:SetPoint("CENTER", 108, 1);
         SlashCmdList["QUICKHEAL"] = QuickHeal_Command_Paladin;
         SLASH_QUICKHEAL1 = "/qh";
@@ -993,13 +993,13 @@ local function Initialise()
         FindHoTSpellToUseNoTarget = QuickHeal_Druid_FindHoTSpellToUseNoTarget;
         GetRatioHealthyExplanation = QuickHeal_Druid_GetRatioHealthyExplanation;
         QuickHealDownrank_Slider_NH:SetMinMaxValues(1,11);
-        QuickHealDownrank_Slider_NH:SetValue(11);
+        QuickHealDownrank_Slider_NH:SetValue(QuickHealVariables["DownrankValueNH"] or 11);
         QuickHealDownrank_Slider_FH:SetMinMaxValues(1,9);
-        QuickHealDownrank_Slider_FH:SetValue(9);
+        QuickHealDownrank_Slider_FH:SetValue(QuickHealVariables["DownrankValueFH"] or 9);
         QuickHeal_DownrankSlider:SetHeight(110);
         QuickHealDownrank_Slider_RJ:Show();
         QuickHealDownrank_Slider_RJ:SetMinMaxValues(1,11);
-        QuickHealDownrank_Slider_RJ:SetValue(11);
+        QuickHealDownrank_Slider_RJ:SetValue(QuickHealVariables["DownrankValueRJ"] or 11);
         QuickHealDownrank_RankNumberRJ:Show();
         QuickHealDownrank_Slider_NHText:SetText("Healing Touch");
         QuickHealDownrank_Slider_FHText:SetText("Regrowth");
